@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block cj %}
+<li class="dropdown active">
+{% endblock %}
+
+    {% block home %}
+    <li><a class="" href="{% url 'home' %}">Home</a></li>
+    {% endblock %}
+
+{% block content %}
+<p>  <hr> </p>
+<p>  <hr> </p>
+<div class="w3-container w3-lobster">
+  <p class="w3-xxxlarge" style="text-align:center">All CV catagory list</p>
+</div>
+
+{% for cvc in cvcatagory %}
+<ul class="list-group" style="width:600px; margin:0 auto;">
+  <li class="list-group-item d-flex justify-content-between align-items-center" onclick="location.href ='{{ cvc.get_absolute_url }}';">
+    {{ cvc.name }}
+    <span class="badge badge-primary badge-pill">  </span>
+  </li>
+</ul>
+
+{% endfor %}
+<br><br><br>
+{% endblock %}

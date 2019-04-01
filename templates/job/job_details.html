@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ job.company }}
+{% endblock %}
+    {% block home %}
+    <li><a class="active" href="{% url 'home' %}">Home</a></li>
+    {% endblock %}
+{% block content %}
+<div class="card text-center">
+  <div class="card-header">
+      <h5>Company Name: {{ job.company }}<br></h5>
+      <h5>Company Website: <a href=" {{ job.website }}">{{ job.website }}</a><br></h5>
+          <h5>Post: {{ job.post_name }}</h5>
+      <h5>Job Type: {{ job.job_type }}<br></h5>
+      <h5> Skill: {{ job.skill }}<br></h5>
+  </div>
+  <div class="card-body">
+      <p class="card-title"> <b>Qualification:</b> {{ job.qualification }} </p>
+      <p class="card-text"> <b>Job Nature:</b> {{ job.job_nature }} </p>
+      <p class="card-text"><b> Salary:</b> {{ job.salary_range }} </p>
+      <p class="card-text"><b>Age Limitation:</b> {{ job.age_limit }} </p>
+      <p class="card-text"> <b>Circular Publish Date:</b> {{ job.publication_Date }} </p>
+      <p class="card-text"> <b>Application Last Date:</b> {{ job.application_last_date }} </p>
+
+      <a href="{% url 'job_list' %}" class="btn btn-primary"> Back to the List </a>
+  </div>
+  <div class="card-footer text-muted">
+
+  </div>
+</div>
+<br><br><br>
+{% endblock %}

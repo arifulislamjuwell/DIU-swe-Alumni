@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+List by catagory
+{% endblock %}
+
+    {% block home %}
+    <li><a class="" href="{% url 'home' %}">Home</a></li>
+    {% endblock %}
+
+{% block content %}
+<p>  <hr> </p>
+<p>  <hr> </p>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'request_button.css' %}">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<br>
+<h2 style=" font-family:cursive; text-align:center" >  We Have {{ cv }} Cv in This catagory </h2>
+<br>
+<br>
+{% if req %}
+<button type="submit" style="display: table;margin: 0 auto" class="myButton">Pending Request</button>
+{% else %}
+<a style="text-decoration: none" href="{% url 'request_cv' pk=catagory.pk %}"><button onclick="alert('Thank you for your request, You will get feedback in your profile section')" type="submit" style="display: table;margin: 0 auto" class="myButton">Request For Cv</button></a>
+{% endif %}
+<br><br><br>
+
+{% endblock %}

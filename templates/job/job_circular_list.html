@@ -1,0 +1,32 @@
+{%  extends 'base.html' %}
+    {% block home %}
+    <li><a class="" href="{% url 'home' %}">Home</a></li>
+    {% endblock %}
+
+{% block content %}
+<br>
+
+<p>  <hr> </p>
+<p>  <hr> </p>
+<form method="get" action="">
+    <p style="text-align:center"><input type="text" name="q" value="{{ request.get.q }}" placeholder="Search Job" ><input type="submit" value="Search"></p>
+</form>
+
+<div class="w3-container w3-lobster">
+  <p class="w3-xxxlarge" style="text-align:center">All Job Circular list </p>
+</div>
+<hr>
+{% for jobs in job %}
+<div class="card text-center">
+  <div class="card-body">
+    <h6 class="card-title"> {{ jobs.job_type }}- skill need: {{ jobs.skill }} by <a href="{% url 'show_profile' pk=jobs.user.pk %}"> {{ jobs.user }}</a> </h6>
+      <a href="{{ jobs.get_absolute_url }}" class="btn btn-primary">View details</a>
+
+  </div>
+  <div class="card-footer text-muted">
+    {{ jobs.publication_Date }}
+  </div>
+</div>
+{% endfor %}
+<br><br><br>
+{% endblock %}

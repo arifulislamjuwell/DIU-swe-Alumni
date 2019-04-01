@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block announce %}
+<li class="active"><a class="" href="{% url 'announcement' %}"> Announcement </a></li>
+{% endblock %}
+{% block content %}
+
+{% load static %}
+<section id="mu-page-breadcrumb">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="mu-page-breadcrumb-area">
+           <h2>Announcement</h2>
+           <ol class="breadcrumb">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="active">Announcement</li>
+          </ol>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+<br>
+<br>
+<link rel="stylesheet" type="text/css" href="{% static 'announce.css' %}">
+<div class="list-type1" style="width: 18rem;  display: table;margin: 0 auto;">
+<ol>
+    <br>
+  {% for ann in announce %}
+<li><a href="#">{{ ann.title }}</a></li>
+  {% endfor %}
+</ol>
+</div>
+
+<br>
+
+{% endblock %}

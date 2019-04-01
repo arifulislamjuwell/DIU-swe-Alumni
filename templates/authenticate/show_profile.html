@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+{% for profile in profile %}
+<p>
+    <hr>
+</p>
+<p>
+    <hr>
+</p>
+<p>
+    <hr>
+</p>
+<link rel="stylesheet" type="text/css" href="{% static 'show_profile.css' %}">
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img style="height:120px; width:150px" src="{{ profile.image.url }}" alt=""/>
+                            <!--<div class="file btn btn-lg btn-primary">
+
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>-->
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{ profile.full_name }}
+                                    </h5>
+                                    <h6>
+                                        {{ profile.working }}
+                                    </h6>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        {% if profile.user == user %}
+                        <a href="" ><input type="button" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></a>
+                        <hr>
+                        <a href="{% url 'edit_cv_job' %}"> <input type="button" class="profile-edit-btn" name="btnAddMore" value="Edit CV JOB"/></a>
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+
+                            <p><a style="text-decoration: none" href="{% url 'requested_cv' %}"> <b>Requested CV</b> </a></p>
+
+                            <p>Socisl Site Link </p>
+                            <a style="text-decoration: none" href="{{ profile.facebook }}">Facebook Link</a><br/>
+                            <a style="text-decoration: none" href="{{ profile.github }}">Github Link</a><br/>
+                            <a style="text-decoration: none" href="{{ profile.linkedin }}">Linkedin</a>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Username</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.user }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.full_name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.email }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Versity ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.versity_id_number }}</p>
+                                            </div>
+                                        </div>
+                                  <div class="row">
+                                            <div class="col-md-6">
+                                                <label> skill</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.skill }}</p>
+                                            </div>
+                                        </div>
+
+
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+</div>
+
+
+{% endfor %}
+
+{% endblock %}

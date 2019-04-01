@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<p>  <hr> </p>
+<p>  <hr> </p>
+<p>  <hr> </p>
+<p>  <hr> </p>
+<link rel="stylesheet" type="text/css" href="{% static 'add_job.css' %}">
+<div class="form-style-5">
+<form action="{% url 'add_cv' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+<fieldset>
+<legend><span class="number">1</span> Your Info</legend>
+<input type="text" name="skill"  placeholder=" Skill *">
+<input type="email" name="email" placeholder="Your Email *">
+
+<select id="job" name="position" data-component="dropdown">
+
+  <option value=""> Apply For </option>
+    {% for catagory_name in catagory %}
+  <option value="{{ catagory_name.name }}">{{ catagory_name.name }} </option>
+    {% endfor %}
+
+
+</select>
+</fieldset>
+<fieldset>
+<legend><span class="number">2</span> Add CV Here </legend>
+<input type="file" name="upload_file" placeholder=" "> </input>
+</fieldset>
+<input type="submit" value="Submit" />
+</form>
+</div>
+<br>
+<br>
+<br>
+{% endblock %}

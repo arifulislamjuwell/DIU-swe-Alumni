@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'remove.css'%}">
+<link rel="stylesheet" href="{% static 'remove_list.css'%}">
+<nav id="navbar-example2" class="navbar navbar-light bg-light">
+  <a style=" display: table;margin: 0 auto;" class="navbar-brand" href="#">You can easily remove or edit your CV or JOB</a>
+</nav>
+<div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+  <h4 id="fat" style="text-align:center">my CV </h4>
+        <p style="text-align:center;color:orange"><b>{{ cverror }}</b> </p>
+    <div class="list-type5">
+<ol>
+  {% for cv in usercv %}
+<li><a href="#">  {{ cv.skill }} - {{ cv.publish_date }}  </a></li>
+</ol>
+        <div style="  display: table;margin: 0 auto;">
+        <b class="popup" onclick="myFunction1()">
+            <button style="color:red;" >Delete</button>
+  <span class="popuptext" id="myPopup1">Are You Confirm?
+      <p> <a href="javascript:{document.getElementById('delete').submit()}"><b style="color:yellow;"> Yes</b></a> OR  <a href="" ><b style="color:yellow;"> No</b></a> </p>
+
+<form id="delete" action="{% url 'cvdelete' pk=cv.pk %}" method="post">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+ </span></b>
+        </div>
+</div>
+
+  </div>
+  {% endfor %}
+  <p></p>
+    <br>
+    <br>
+  <h4 id="mdo" style="text-align:center">my created JOB</h4>
+  <p style="text-align:center;color:orange"><b>{{ joberror }}</b> </p>
+    {% for job in userjob %}
+    <div class="card">
+  <div class="card-body">
+      {{ joberror }} {{ job.company }} - {{ job.publication_Date }} - {{ job.post_name }}<b class="popup" onclick="myFunction()"> <button style="color:red" >Delete</button>
+  <span class="popuptext" id="myPopup">Are You Confirm?
+    <p> <a href="javascript:{document.getElementById('delete1').submit()}"> Yes</a> OR  <a href="" >No</a> </p>
+l
+<form id="delete1" action="{% url 'jobdelete' pk=job.pk %}" method="post">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+
+ </span></b>
+  </div>
+  </div>
+    {% endfor %}
+</div>
+<p>
+
+</p>
+<br>
+<p>
+
+</p>
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+function myFunction1() {
+  var popup = document.getElementById("myPopup1");
+  popup.classList.toggle("show");
+}
+</script>
+{% endblock %}
+

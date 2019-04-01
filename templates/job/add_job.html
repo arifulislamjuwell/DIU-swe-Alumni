@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<p>  <hr> </p>
+<p>  <hr> </p>
+<p>  <hr> </p>
+<p>  <hr> </p>
+<link rel="stylesheet" type="text/css" href="{% static 'add_job.css' %}">
+
+<div class="form-style-5">
+<form action="{% url 'add_job' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<fieldset>
+<legend><span class="number">1</span> Company Info </legend>
+    <input type="text" name="company_name" placeholder="Company Name *">
+    <input type="text" name="website" placeholder="Company Website *">
+
+    <legend><span class="number">2</span> Job Related Info </legend>
+
+    <input type="text" name="post_name" placeholder="Post Name *">
+    <input type="text" name="job_type" placeholder="Job Type *">
+    <input type="text" name="skill_needed" placeholder="Skill Needed *">
+
+
+<select id="job" name="age_limit" data-component="dropdown">
+       <option value=""> Age </option>
+            <option value="15-20 years"> 15-20 </option>
+             <option value="20-25 years"> 20-25 </option>
+            <option value="25-30 years"> 25-30 </option>
+            <option value="30-35 years"> 30-35 </option>
+            <option value="35-40 years"> 35-40 </option>
+</select>
+<select id="job" name="job_nature" data-component="dropdown">
+            <option value=""> Job Nature </option>
+            <option value="Full Time"> Full Time </option>
+            <option value="Part Time"> Part Time </option>
+</select>
+<select id="job" name="qualifications" data-component="dropdown">
+    <option value=""> Qualification </option>
+    <option value="Hns"> Hns </option>
+    <option value="HSC"> HSC </option>
+    <option value="SSC"> SSC </option>
+</select>
+<select id="job" name="salary_range" data-component="dropdown">
+    <option value="">Salary Range </option>
+            <option value="10-15"> 10-15 </option>
+            <option value="15-20"> 15-20 </option>
+             <option value="20-25"> 20-25 </option>
+            <option value="25-30"> 25-30 </option>
+</select>
+</fieldset>
+
+<input type="submit" value="Submit" />
+</form>
+</div>
+<br>
+<br>
+{% endblock %}
