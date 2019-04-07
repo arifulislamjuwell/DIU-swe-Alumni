@@ -39,4 +39,4 @@ class Contact_Us(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     email=models.EmailField(max_length=200)
     subject=models.CharField(max_length=200)
-    message= models.CharField(max_length=1000)
+    message= models.TextField(max_length=1000)

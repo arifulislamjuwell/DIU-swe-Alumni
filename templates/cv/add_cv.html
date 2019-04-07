@@ -6,26 +6,41 @@
 <p>  <hr> </p>
 <p>  <hr> </p>
 <link rel="stylesheet" type="text/css" href="{% static 'add_job.css' %}">
+
 <div class="form-style-5">
-<form action="{% url 'add_cv' %}" method="post" enctype="multipart/form-data">
+  <fieldset>
+    <legend><span class="number">1</span> Check Apply For Options Below, If Not </legend>
+    <button class="" onclick="openForm()"> Add options </button>
+      <div class="form-popup" id="myForm">
+  <form action="{% url 'add_cv_c' %}" class="form-container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label for="psw"><b>Option Name</b></label>
+    <input type="text" placeholder=" " name="cvc" required>
+
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+  </fieldset>
+  <form action="{% url 'add_cv' %}" method="post" enctype="multipart/form-data">
   {% csrf_token %}
 <fieldset>
-<legend><span class="number">1</span> Your Info</legend>
+<legend><span class="number">2</span> Your Info</legend>
 <input type="text" name="skill"  placeholder=" Skill *">
 <input type="email" name="email" placeholder="Your Email *">
 
-<select id="job" name="position" data-component="dropdown">
+<select id="job" name="position" data-component="dropdown" >
 
   <option value=""> Apply For </option>
     {% for catagory_name in catagory %}
   <option value="{{ catagory_name.name }}">{{ catagory_name.name }} </option>
     {% endfor %}
-
-
 </select>
 </fieldset>
 <fieldset>
-<legend><span class="number">2</span> Add CV Here </legend>
+<legend><span class="number">3</span> Add CV Here </legend>
 <input type="file" name="upload_file" placeholder=" "> </input>
 </fieldset>
 <input type="submit" value="Submit" />
@@ -34,4 +49,17 @@
 <br>
 <br>
 <br>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
 {% endblock %}
+
+

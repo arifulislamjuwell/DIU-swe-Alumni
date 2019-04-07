@@ -1,22 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br>
 <div class="card text-center">
   <div class="card-header">
-    Featured
+    <b>Requestef CV user and Email</b>
+    <hr>
   </div>
+    <b>{{ no }}</b>
+  {% for i in feed %}
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="{% url 'show_profile' pk=user.pk %}" class="btn btn-primary"> Back to your profile </a>
+    <h4 class="card-title">{{ i.cv_user }}</h4>
+    <p class="card-text">{{ i.email }}</p>
+     <p class="card-text">{{ i.skill }}</p>
   </div>
-  <div class="card-footer text-muted">
-    2 days ago
-  </div>
+  <hr>
+  {% endfor %}
 </div>
-
-{% for i in ee %}
-{{ i.catagory }}
-{% endfor %}
 
 {% endblock %}

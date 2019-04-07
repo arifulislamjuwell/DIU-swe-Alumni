@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Sociallink,Annoucement,Seminar,Galarry_image,Gallery_image_catagory
+from .models import Sociallink,Annoucement,Seminar,Galarry_image,Gallery_image_catagory,Contact_Us
 from jobcv.models import Cv,JobCircular
+from django.contrib.auth.models import User
 # Create your views here.
 def home(request):
     batch_number=29
@@ -16,9 +17,6 @@ def home(request):
     twitter=get_object_or_404(Sociallink, name='twitter')
     linkedin=get_object_or_404(Sociallink, name='linkedin')
 
-
-
-
     contex={'batch':batch_number,'fb':facebook,'yt':youtube,'t':twitter,'li':linkedin,'ann':announcement,'seminars':seminar,'cv':cv,'job':job}
     return render(request,templates,contex)
 
@@ -31,9 +29,17 @@ def announcement(request):
     return render(request,templates,context)
 
 def contact_us(request):
-     templates= 'home/contact.html'
-
-     return render(request,templates)
+    templates= 'home/contact.html'
+    if request.method=='POST':
+        user=get_object_or_404(User, username=request.user)
+        email=user.email
+        contact=Contact_Us()
+        contact.user=request.user
+        contact.email=email
+        contact.subject=request.POST.get('subject')
+        contact.message=request.POST.get('message')
+        contact.save()
+    return render(request,templates)
 
 def gallery(request):
     templates= 'home/gallery.html'

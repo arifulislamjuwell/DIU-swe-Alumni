@@ -90,13 +90,24 @@ class Cv(models.Model):
     approve = models.CharField(choices=APPROVE,max_length=1, default='d')
     def __str__(self):
         return str(self.skill)
+
 class Request_cv(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     catagory=models.ForeignKey(CvCatagory,on_delete=models.CASCADE)
     check =models.CharField(max_length=1)
+
+class Requested_feedback_cv(models.Model):
+    request_user=models.CharField(max_length=100)
+    cv_user=models.CharField(max_length=100)
+    tour=models.CharField(max_length=100)
+    email=models.EmailField(max_length=200)
+    skill=models.CharField(max_length=200)
     APPROVE= (
         ('a', 'approve'),
         ('d', 'deny')
 
     )
     approve = models.CharField(choices=APPROVE,max_length=1, default='d')
+
+    def __str__(self):
+        return self.request_user

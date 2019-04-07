@@ -94,6 +94,12 @@ def upload_cv(request):
 
         return redirect('profile')
 
+def add_cv_catagory(request):
+    if request.method=='POST':
+        catagory=CvCatagory()
+        catagory.name=request.POST.get('cvc')
+        catagory.save()
+        return redirect('add_cv')
 
 def cv_catagory_list(request):
     templates= 'cv/cv_catagory_list.html'
@@ -101,13 +107,23 @@ def cv_catagory_list(request):
     contex = {'cvcatagory':catagory}
     return render(request,templates,contex)
 
-def request_cv(request,pk):
-    catagory= get_object_or_404(CvCatagory, pk=pk)
+def req_cv(request,pk):
+    catagory= get_object_or_404(CvCatagory,pk=pk)
+    cvs=Cv.objects.all().filter(catagory=catagory)
     request_cv=Request_cv()
     request_cv.catagory=catagory
     request_cv.user=request.user
     request_cv.check=1
     request_cv.save()
+    for cv in cvs:
+        obj=Requested_feedback_cv()
+        obj.request_user=request.user.username
+        obj.cv_user=cv.user.username
+        obj.tour=catagory.name
+        obj.email=cv.email
+        obj.skill=cv.skill
+        obj.save()
+
     return redirect('cv_catagory')
 
 @login_required
@@ -115,7 +131,6 @@ def cv_catagory_post_list(request,slug):
     templates= 'cv/catagory_post_list.html'
     catagories = CvCatagory.objects.all()
     cv = Cv.objects.all()
-    req_cv= Request_cv()
     if slug:
         catagory= get_object_or_404(CvCatagory, slug=slug)
         cv= cv.filter(catagory = catagory, approve ='a').count()
@@ -125,6 +140,13 @@ def cv_catagory_post_list(request,slug):
     return render(request,templates,contex)
 
 def requested_cv_feedback(request):
-    request_cv=Request_cv.objects.all().filter(user=request.user,approve='a')
     templates= 'cv/requested_cv.html'
-    return render(request,templates)
+    feedback= Requested_feedback_cv.objects.all().filter(request_user=request.user.username,approve='a')
+    if not feedback:
+        no_feed= 'Admin not permit yet'
+        context={'no':no_feed}
+        return render(request,templates,context)
+    context={'feed':feedback}
+    return render(request,templates,context)
+
+

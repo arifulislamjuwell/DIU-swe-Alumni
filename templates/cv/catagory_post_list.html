@@ -19,8 +19,10 @@ List by catagory
 <br>
 {% if req %}
 <button type="submit" style="display: table;margin: 0 auto" class="myButton">Pending Request</button>
-{% else %}
+
+{% elif cv != 0 %}
 <a style="text-decoration: none" href="{% url 'request_cv' pk=catagory.pk %}"><button onclick="alert('Thank you for your request, You will get feedback in your profile section')" type="submit" style="display: table;margin: 0 auto" class="myButton">Request For Cv</button></a>
+
 {% endif %}
 <br><br><br>
 
